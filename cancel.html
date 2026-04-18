@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Canceled — Markd</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #4F46E5;
+    --accent-hover: #4338CA;
+    --font-body: 'Inter', sans-serif;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-6: 1.5rem;
+    --space-8: 2rem; --space-10: 2.5rem;
+    --text-xs: clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
+    --text-sm: clamp(0.875rem,0.8rem + 0.35vw,1rem);
+    --text-base: clamp(1rem,0.95rem + 0.25vw,1.125rem);
+    --text-xl: clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+    --transition: 180ms cubic-bezier(0.16,1,0.3,1);
+  }
+  [data-theme="dark"] {
+    --bg:#0f0f11; --surface:#18181b; 
+    --border:rgba(255,255,255,0.08); --text:#e4e4e7;
+    --text-muted:#a1a1aa; --text-faint:#71717a;
+    --shadow-lg:0 24px 64px rgba(0,0,0,0.5);
+  }
+  [data-theme="light"] {
+    --bg:#f5f5f7; --surface:#ffffff; 
+    --border:rgba(0,0,0,0.08); --text:#18181b;
+    --text-muted:#52525b; --text-faint:#a1a1aa;
+    --shadow-lg:0 24px 64px rgba(0,0,0,0.1);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-font-smoothing:antialiased}
+  body{
+    min-height:100dvh; font-family:var(--font-body); font-size:var(--text-base);
+    color:var(--text); background:var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    padding:var(--space-6) var(--space-4); position:relative; overflow-x:hidden;
+  }
+  /* Subtle neutral glow for canceled state instead of bright purple */
+  body::before{
+    content:''; position:fixed; top:-20%; left:50%; transform:translateX(-50%);
+    width:600px; height:400px;
+    background:radial-gradient(ellipse,rgba(255,255,255,0.03) 0%,transparent 70%);
+    pointer-events:none; z-index:0;
+  }
+  .card{
+    position:relative; z-index:1; background:var(--surface);
+    border:1px solid var(--border); border-radius:var(--radius-xl);
+    box-shadow:var(--shadow-lg); padding:var(--space-10) var(--space-8);
+    max-width:480px; width:100%; text-align:center;
+  }
+  /* Canceled Badge Styling */
+  .badge{
+    display:inline-flex; align-items:center; gap:var(--space-2);
+    background:rgba(239, 68, 68, 0.1); border:1px solid rgba(239, 68, 68, 0.2);
+    color:#fca5a5; font-size:var(--text-xs); font-weight:600;
+    letter-spacing:0.05em; text-transform:uppercase;
+    padding:0.35rem 0.85rem; border-radius:9999px; margin-bottom:var(--space-6);
+  }
+  .badge-dot{
+    width:6px; height:6px; border-radius:50%; background:#ef4444;
+  }
+  
+  .logo-wrap{
+    display:flex; align-items:center; justify-content:center;
+    gap:var(--space-3); margin-bottom:var(--space-4);
+  }
+  .logo-name{font-size:var(--text-xl);font-weight:700;color:var(--text);letter-spacing:-0.02em}
+  .logo-name span{color:var(--accent)}
+  
+  /* H1 includes the centering fix */
+  h1{
+    display:flex; align-items:center; justify-content:center; gap:0.35rem;
+    font-size:var(--text-xl); font-weight:700; letter-spacing:-0.02em; margin-right:-0.02em;
+    color:var(--text); margin-bottom:var(--space-3); line-height:1.15;
+  }
+  
+  .subtitle{
+    font-size:var(--text-base); color:var(--text-muted); 
+    line-height:1.6; margin:0 auto var(--space-4);
+  }
+  .subtitle:last-of-type {
+    margin-bottom:var(--space-8);
+  }
+
+  /* Secondary Button Styling for Cancellation */
+  .btn-secondary{
+    display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+    background:transparent; color:var(--text); font-size:var(--text-sm); font-weight:600;
+    padding:0.75rem 1.75rem; border-radius:var(--radius-md); 
+    border:1px solid var(--border); cursor:pointer;
+    transition:background var(--transition), transform var(--transition);
+    letter-spacing:-0.01em; width: 100%; max-width: 250px;
+  }
+  .btn-secondary:hover{background:rgba(255,255,255,0.05); transform:translateY(-1px)}
+  .btn-secondary:active{transform:translateY(0)}
+  
+  @media(max-width:480px){.card{padding:var(--space-8) var(--space-6)}}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="badge">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <path d="M2 2l6 6M8 2L2 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+    Payment Canceled
+  </div>
+  
+  <div class="logo-wrap">
+    <img src="icon_markd_128.png" alt="Markd" width="52" height="52" style="border-radius:14px;flex-shrink:0;" loading="eager">
+    <span class="logo-name">Mark<span>d</span></span>
+  </div>
+  
+  <h1>Payment Canceled</h1>
+  
+  <p class="subtitle">You have canceled the checkout process. No changes have been made to your account and you haven't been charged.</p>
+  <p class="subtitle" style="font-size: var(--text-sm); color: var(--text-faint);">If you change your mind, you can restart the upgrade process from the extension anytime.</p>
+  
+  <button class="btn-secondary" onclick="window.close()">
+    Close Window
+  </button>
+</div>
+
+</body>
+</html>
