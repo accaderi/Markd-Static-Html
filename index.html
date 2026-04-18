@@ -7,139 +7,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --accent: #4F46E5;
-    --accent-hover: #4338CA;
-    --accent-glow: rgba(79,70,229,0.18);
-    --font-body: 'Inter', sans-serif;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-6: 1.5rem;
-    --space-8: 2rem; --space-10: 2.5rem;
-    --text-xs: clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
-    --text-sm: clamp(0.875rem,0.8rem + 0.35vw,1rem);
-    --text-base: clamp(1rem,0.95rem + 0.25vw,1.125rem);
-    --text-lg: clamp(1.125rem,1rem + 0.75vw,1.5rem);
-    --text-xl: clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
-    --transition: 180ms cubic-bezier(0.16,1,0.3,1);
-  }
-  [data-theme="dark"] {
-    --bg:#0f0f11; --surface:#18181b; --surface-2:#1e1e23;
-    --border:rgba(255,255,255,0.08); --text:#e4e4e7;
-    --text-muted:#71717a; --text-faint:#3f3f46;
-    --shadow-lg:0 24px 64px rgba(0,0,0,0.5);
-  }
-  [data-theme="light"] {
-    --bg:#f5f5f7; --surface:#ffffff; --surface-2:#f9f9fb;
-    --border:rgba(0,0,0,0.08); --text:#18181b;
-    --text-muted:#71717a; --text-faint:#d4d4d8;
-    --shadow-lg:0 24px 64px rgba(0,0,0,0.1);
-  }
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  html{-webkit-font-smoothing:antialiased}
-  body{
-    min-height:100dvh; font-family:var(--font-body); font-size:var(--text-base);
-    color:var(--text); background:var(--bg);
-    display:flex; align-items:center; justify-content:center;
-    padding:var(--space-6) var(--space-4); position:relative; overflow-x:hidden;
-  }
-  body::before{
-    content:''; position:fixed; top:-20%; left:50%; transform:translateX(-50%);
-    width:600px; height:400px;
-    background:radial-gradient(ellipse,rgba(79,70,229,0.12) 0%,transparent 70%);
-    pointer-events:none; z-index:0;
-  }
-  .card{
-    position:relative; z-index:1; background:var(--surface);
-    border:1px solid var(--border); border-radius:var(--radius-xl);
-    box-shadow:var(--shadow-lg); padding:var(--space-10) var(--space-8);
-    max-width:560px; width:100%; text-align:center;
-  }
-  .badge{
-    display:inline-flex; align-items:center; gap:var(--space-2);
-    background:var(--accent-glow); border:1px solid rgba(79,70,229,0.3);
-    color:#818cf8; font-size:var(--text-xs); font-weight:600;
-    letter-spacing:0.05em; text-transform:uppercase;
-    padding:0.35rem 0.85rem; border-radius:9999px; margin-bottom:var(--space-6);
-  }
-  .badge-dot{
-    width:6px; height:6px; border-radius:50%; background:#818cf8;
-    animation:pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
-  .logo-wrap{
-    display:flex; align-items:center; justify-content:center;
-    gap:var(--space-3); margin-bottom:var(--space-4);
-  }
-  .logo-icon{
-    width:44px; height:44px;
-    background:linear-gradient(135deg,#4F46E5 0%,#7C3AED 100%);
-    border-radius:var(--radius-lg); display:flex; align-items:center; justify-content:center;
-    box-shadow:0 0 20px rgba(79,70,229,0.35);
-  }
-  .logo-name{font-size:var(--text-xl);font-weight:700;color:var(--text);letter-spacing:-0.02em}
-  .logo-name span{color:var(--accent)}
-  h1 {
-  position: relative;
-  display: inline-flex; /* Shrinks the bounding box to just the text */
-  align-items: center;
-  justify-content: center;
-  
-  font-size: var(--text-xl);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  margin-right: -0.02em; 
-  color: var(--text);
-  margin-bottom: var(--space-3);
-  line-height: 1.15;
-}
-
-h1 .emoji {
-  position: absolute;
-  left: 100%; /* Pushes the emoji completely outside the centering calculation */
-  padding-left: 0.35rem;
-}
-  .subtitle{font-size:var(--text-base);color:var(--text-muted);line-height:1.6;max-width:44ch;margin:0 auto var(--space-8)}
-  .features{
-    background:var(--surface-2); border:1px solid var(--border);
-    border-radius:var(--radius-lg); padding:var(--space-6); margin-bottom:var(--space-8); text-align:left;
-  }
-  .features-title{
-    font-size:var(--text-xs); font-weight:600; letter-spacing:0.07em;
-    text-transform:uppercase; color:var(--text-muted); margin-bottom:var(--space-4);
-  }
-  .features-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3) var(--space-4); list-style:none}
-  .features-grid li{display:flex; align-items:flex-start; gap:var(--space-2); font-size:var(--text-sm); color:var(--text); line-height:1.4; max-width:100%}
-  .check{flex-shrink:0; margin-top:2px; width:16px; height:16px; border-radius:50%; background:rgba(79,70,229,0.15); display:flex; align-items:center; justify-content:center}
-  .check svg{color:#818cf8}
-  .feature-name{font-weight:600; color:var(--text)}
-  .feature-desc{color:var(--text-muted); font-size:var(--text-xs)}
-  .btn-primary{
-    display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
-    background:var(--accent); color:#fff; font-size:var(--text-sm); font-weight:600;
-    padding:0.75rem 1.75rem; border-radius:var(--radius-md); border:none; cursor:pointer;
-    transition:background var(--transition),box-shadow var(--transition),transform var(--transition);
-    letter-spacing:-0.01em;
-  }
-  .btn-primary:hover{background:var(--accent-hover);box-shadow:0 0 24px rgba(79,70,229,0.4);transform:translateY(-1px)}
-  .btn-primary:active{transform:translateY(0)}
-  .close-hint{display:block; margin-top:var(--space-4); font-size:var(--text-xs); color:var(--text-faint)}
-  #confetti-canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99}
-  @media(max-width:480px){.card{padding:var(--space-8) var(--space-6)}.features-grid{grid-template-columns:1fr}}
-</style>
+<!-- Link to your external stylesheet -->
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-success">
 <canvas id="confetti-canvas"></canvas>
+
 <div class="card">
-  <div class="badge"><span class="badge-dot"></span>Premium Activated</div>
+  <div class="badge badge-success"><span class="badge-dot"></span>Premium Activated</div>
+  
   <div class="logo-wrap">
-    <img src="icon_markd_128.png" alt="Markd" width="52" height="52" style="border-radius:14px;flex-shrink:0;" loading="eager">
+    <img src="icon_markd_128.png" alt="Markd" width="52" height="52" class="logo-img" loading="eager">
     <span class="logo-name">Mark<span>d</span></span>
   </div>
+  
   <h1>You're all set! <span class="emoji">🎉</span></h1>
   <p class="subtitle">Your bookmarks will never be a mess again. Everything below is now fully unlocked and ready to use.</p>
+  
   <div class="features">
     <p class="features-title">What's now unlocked</p>
     <ul class="features-grid">
@@ -151,19 +35,18 @@ h1 .emoji {
       <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="feature-name">Auto-Sync</span><br><span class="feature-desc">Browser ↔ app always in sync</span></span></li>
       <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="feature-name">Multi-Provider AI</span><br><span class="feature-desc">OpenAI, Gemini, Claude &amp; more</span></span></li>
       <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="feature-name">Local AI (Ollama)</span><br><span class="feature-desc">Private models on your machine</span></span></li>
-      <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="feature-name">Import &amp; Export</span><br><span class="feature-desc">Backup or migrate in one click</span></span></li>
-      <li><span class="check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><span class="feature-name">Priority AI</span><br><span class="feature-desc">Faster, more capable models</span></span></li>
     </ul>
   </div>
-  <button class="btn-primary" onclick="window.close()">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Close &amp; Start Using Markd
-  </button>
-  <span class="close-hint">This tab will close — reopen the extension to get started</span>
+
+  <div class="notice-box">
+    You can safely close this tab and return to the Markd extension.
+  </div>
 </div>
+
 <script>
 (function(){
   const canvas=document.getElementById('confetti-canvas');
+  if(!canvas) return;
   const ctx=canvas.getContext('2d');
   canvas.width=window.innerWidth; canvas.height=window.innerHeight;
   const colors=['#4F46E5','#7C3AED','#818cf8','#c4b5fd','#ffffff','#e0e7ff'];
